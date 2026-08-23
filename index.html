@@ -1,17 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Web Page</title>
-</head>
-<body>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: #98AFC7;
 
-    <h1>Welcome to My Website</h1>
-    <p>This is a simple paragraph of text on my new web page.</p>
-    
-    <!-- This is a link -->
-    <a href="https://www.google.com" target="_blank">Visit Google</a>
+            } 
+            .box {
+                border: 1px solid #000000;
+                margin-bottom: 10px; 
+            }
 
-</body>
+            .box1 {
+                border: 1px solid#000000;
+                width: 150px;
+                height: 150px;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+
+            }
+            .main {
+                display: flex;
+            }
+
+            .left {
+                flex: 1;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                margin-top: 50px;
+
+
+            }
+            
+            .middle {
+                flex: 2;
+                border: 1px solid #000000;
+                margin-top: 5px;
+                color: #FFFFFF;
+                height: 550px;
+
+
+            }
+            .right {
+                flex: 1;
+            }
+
+
+            h1 {
+                text-align: center;
+            }
+            h2 {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="box" >
+            <h1>The Ski Run</h1>
+        </div>
+        <div class="box">
+            <h2 >All About The Ski Run</h2>
+        </div>
+        <div class="main">
+            
+            <div class="left">
+                <div class="box1">
+                    <p><a herf="Ski_Lessons.html">Hello</a></p>
+                    <p>Hello</p>
+                </div>
+            </div>
+            
+            <div class="middle">
+                <p style="text-align: center;margin-top: 50px; ">We are a family run ski school that first opened in December 1990.  We operate six ski schools - Alpbach, Innsbruck, Kitzbuhel, Mayrofen, Obergurgl and Saalbach.  Next year we are hoping to open four more.</p>
+                <p style="text-align: center;">We are celebrating 30 years of skiing and this year we have anniversary celebrations including our weekly ski show.</p>
+                <p style="text-align: center;">Would you like ski lessons but not in a group?  Yes, then book a private lesson.  We cater for beginners to learn the basics and advanced skiers who want to explore off-piste. Private lessons are suited to individual needs.</p>
+            </div>
+
+            <div class="right"></div>
+        </div>
+
+    </body>
+
+
+
+
 </html>
