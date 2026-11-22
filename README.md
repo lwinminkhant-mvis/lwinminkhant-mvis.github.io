@@ -18,3 +18,5 @@ Never add a Supabase `service_role` key to this project.
 ## Attendance and wages
 
 Attendance has one shared day/month/year selector. Day mode enables quick roster entry; month and year modes show attendance history for that selected period. Saved present days earn one daily wage and half-days earn half a daily wage. The Payments screen calculates each employee's accrued wages from attendance, subtracts paid/partial payment records, and shows the remaining balance. Pending payment records are listed but do not reduce the balance. Advances recorded as paid also reduce the balance.
+
+The dashboard includes a searchable employee information list and daily expense totals/details, with a date picker to view expenses for today or another day.

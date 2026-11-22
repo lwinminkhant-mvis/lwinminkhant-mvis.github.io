@@ -14,7 +14,7 @@ window.LabourDashboard = (() => {
     try {
       const db = LabourDB.client;
       const [employees, attendance, allAttendance, expenses, payments, payroll] = await Promise.all([
-        fetchAll(db.from("employees").select("id,daily_wage")),
+        fetchAll(db.from("employees").select("id,full_name,employee_code,phone,daily_wage,employment_status").order("full_name")),
         db.from("attendance").select("*").eq("date", LabourApp.dateValue()),
         fetchAll(db.from("attendance").select("employee_id,date,status,created_at").order("date").order("created_at")),
         fetchAll(db.from("expenses").select("*")),
@@ -56,9 +56,59 @@ window.LabourDashboard = (() => {
             ${(attendance.data||[]).slice(0,6).map(a=>`<div class="list-item"><span>Attendance recorded</span><strong>${LabourApp.escapeHTML(a.status||"Recorded")}</strong></div>`).join("") || `<div class="empty">No activity today</div>`}
           </div></section>
         </div>`;
+      container.insertAdjacentHTML("beforeend", `
+        <section class="panel dashboard-expenses">
+          <div class="panel-head">
+            <div><h2>Expenses for selected day</h2><span class="muted">Choose today or another day to review its expenses.</span></div>
+            <input id="dashboardExpenseDate" type="date" value="${LabourApp.dateValue()}" aria-label="Expenses date">
+          </div>
+          <div id="dashboardExpenseContent"></div>
+        </section>
+        <section class="panel dashboard-employees">
+          <div class="panel-head">
+            <div><h2>Employee information</h2><span class="muted">${employees.length} employee${employees.length === 1 ? "" : "s"}</span></div>
+            <div class="toolbar"><input id="dashboardEmployeeSearch" class="field search" placeholder="Search employees" aria-label="Search employees"><a class="btn btn-primary" href="#employees">Manage employees</a></div>
+          </div>
+          <div class="table-wrap dashboard-employee-list">
+            <table><thead><tr><th>Name</th><th>Code</th><th>Phone</th><th>Daily wage</th><th>Status</th></tr></thead>
+            <tbody id="dashboardEmployeeRows">${employees.map(employeeRow).join("")}</tbody></table>
+            ${employees.length ? "" : '<div class="empty">No employees added yet.</div>'}
+          </div>
+        </section>`);
+      const expenseDate = document.getElementById("dashboardExpenseDate");
+      expenseDate.onchange = () => renderDailyExpenses(expenses, expenseDate.value);
+      renderDailyExpenses(expenses, expenseDate.value);
+      document.getElementById("dashboardEmployeeSearch").oninput = event => {
+        const search = event.target.value.toLowerCase();
+        document.querySelectorAll("#dashboardEmployeeRows tr").forEach(row => {
+          row.style.display = row.textContent.toLowerCase().includes(search) ? "" : "none";
+        });
+      };
     } catch (error) {
       container.innerHTML = `<div class="panel"><div class="empty">${LabourApp.escapeHTML(error.message || "Unable to load dashboard.")}</div></div>`;
     }
   }
+
+  function employeeRow(employee) {
+    const status = employee.employment_status || "active";
+    return `<tr><td><strong>${LabourApp.escapeHTML(employee.full_name || "Employee")}</strong></td><td>${LabourApp.escapeHTML(employee.employee_code || "-")}</td><td>${LabourApp.escapeHTML(employee.phone || "-")}</td><td>${LabourApp.money(employee.daily_wage || 0)}</td><td><span class="status status-${LabourApp.escapeHTML(status)}">${LabourApp.escapeHTML(status)}</span></td></tr>`;
+  }
+
+  function renderDailyExpenses(expenses, date) {
+    const content = document.getElementById("dashboardExpenseContent");
+    if (!content) return;
+    if (!date) {
+      content.innerHTML = `<div class="empty">Choose a date to view expenses.</div>`;
+      return;
+    }
+    const rows = expenses.filter(expense => (expense.expense_date || expense.date) === date);
+    const total = rows.reduce((sum, expense) => sum + Number(expense.amount || 0), 0);
+    content.innerHTML = `
+      <div class="daily-expense-total"><span>${LabourApp.formatDate(date)} total</span><strong>${LabourApp.money(total)}</strong></div>
+      <div class="table-wrap"><table><thead><tr><th>Category</th><th>Description</th><th>Amount</th></tr></thead>
+      <tbody>${rows.map(expense => `<tr><td>${LabourApp.escapeHTML(expense.category || "-")}</td><td>${LabourApp.escapeHTML(expense.description || "-")}</td><td><strong>${LabourApp.money(expense.amount)}</strong></td></tr>`).join("")}</tbody></table>
+      ${rows.length ? "" : '<div class="empty">No expenses recorded for this day.</div>'}</div>`;
+  }
+
   return { render };
 })();
