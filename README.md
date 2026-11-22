@@ -1,6 +1,6 @@
 # Labour Book
 
-Labour Book is a responsive labour management and expense tracking PWA built with HTML, CSS, vanilla JavaScript ES modules, Vite, and Supabase. It supports employee records, attendance, projects, expenses, payroll calculations, payments, reports, authentication, CSV export, printing, and offline application-shell caching.
+Labour Book is a responsive labour, wage, expense, and payroll PWA built with React, Vite, modern CSS, and Supabase. It supports worker records, attendance, projects, expenses, payroll calculations, payments, advances, printable receipts, reports, authentication, CSV export, and offline application-shell caching.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ Labour Book is a responsive labour management and expense tracking PWA built wit
 ## Installation
 
 ```bash
-cd "C:\Users\NCL PC Shop\Documents\GitHub\Labor book"
+cd "C:\Users\NCL PC Shop\Documents\GitHub\lwinminkhant-mvis.github.io"
 npm install
 cp .env.example .env
 npm run dev
@@ -30,12 +30,12 @@ npm run preview
 
 1. Create a project at https://supabase.com.
 2. Open **Project Settings > API**.
-3. Copy the project URL and the public **anon** key.
+3. Copy the project URL and the public **publishable** key.
 4. Copy those values into `.env`:
 
 ```text
 VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-public-anon-key
+VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
 
 Never use or expose the service-role key in frontend code or GitHub Actions secrets.
@@ -63,7 +63,7 @@ git push -u origin main
 2. In GitHub, open **Settings > Secrets and variables > Actions**.
 3. Create repository secrets:
    - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_SUPABASE_PUBLISHABLE_KEY`
 4. Open **Settings > Pages**.
 5. Set **Source** to **GitHub Actions**.
 6. Push or run the deploy workflow. The deployed URL is normally:
@@ -72,7 +72,7 @@ git push -u origin main
 https://YOUR_USERNAME.github.io/Labour-Book/
 ```
 
-The Vite base path in `vite.config.js` must match the repository name. This project is prepared for a repository named `Labor book`, using an encoded GitHub Pages base path. If you rename the repository, update `base` in `vite.config.js`.
+The Vite base path in `vite.config.js` matches the repository name `lwinminkhant-mvis.github.io`. Update `base` only if the repository name changes.
 
 ## PWA installation
 
@@ -95,7 +95,7 @@ public/
   service-worker.js
   icons/
 src/
-  main.js
+  main.jsx
   styles/
   components/
   pages/

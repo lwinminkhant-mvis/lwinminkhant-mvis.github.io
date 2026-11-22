@@ -13,7 +13,7 @@ export async function employeesPage() {
 }
 function employeeMarkup(rows, positions, settings) {
   const columns = [
-    {label:'Employee ID',value:r=>r.employee_code || '-'},
+    {label:'Worker ID',value:r=>r.employee_code || '-'},
     {label:'Name',value:r=>`<strong>${esc(r.full_name)}</strong>`},
     {label:'Position',value:r=>esc(r.position || '-')},
     {label:'Daily wage',value:r=>formatMoney(r.daily_wage, settings.currency)},

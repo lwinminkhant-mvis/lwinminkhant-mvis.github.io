@@ -129,11 +129,29 @@ create table if not exists public.payments (
   payment_date date not null,
   amount numeric(14,2) not null,
   payment_method text not null,
+  payment_type text not null default 'payment',
   description text,
   reference_number text,
   created_at timestamptz not null default now(),
-  constraint payments_amount_positive check (amount > 0)
+  constraint payments_amount_positive check (amount > 0),
+  constraint payments_type_check check (payment_type in ('payment','advance'))
 );
+
+alter table public.payments
+  add column if not exists payment_type text not null default 'payment';
+
+do $$
+begin
+  if not exists (
+    select 1 from pg_constraint
+    where conname = 'payments_type_check'
+      and conrelid = 'public.payments'::regclass
+  ) then
+    alter table public.payments
+      add constraint payments_type_check
+      check (payment_type in ('payment','advance'));
+  end;
+end $$;
 
 create index if not exists idx_employees_owner on public.employees(owner_id);
 create index if not exists idx_projects_owner on public.projects(owner_id);

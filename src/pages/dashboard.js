@@ -21,6 +21,7 @@ export async function dashboardPage() {
   const advances = payroll.reduce((n,r)=>n+Number(r.advance_amount||0),0);
   const todayKey = toDateInput();
   const workedToday = new Set(attendance.filter(r => r.date === todayKey && r.status !== 'absent').map(r => r.employee_id)).size;
+  const absentToday = new Set(attendance.filter(r => r.date === todayKey && r.status === 'absent').map(r => r.employee_id)).size;
   const active = employees.filter(r => r.active !== false).length;
 
   const recentAttendance = attendance.slice(0,5);
@@ -42,6 +43,7 @@ export async function dashboardPage() {
       ${stat('Outstanding advances', formatMoney(advances, settings.currency), 'bad')}
       ${stat('Registered employees', active)}
       ${stat('Worked today', `${workedToday} / ${active}`, workedToday ? 'good' : '')}
+      ${stat('Absent today', absentToday, absentToday ? 'bad' : 'good')}
     </div>
     <div class="dashboard-grid">
       ${miniCard('Recent attendance', recentAttendance.map(r=>`<div class="detail-item"><strong>${r.employees?.full_name || 'Employee'}</strong><br><small>${formatDate(r.date, settings.dateFormat)} · ${r.status?.replace('_',' ')}</small></div>`).join('') || '<div class="empty-state">No attendance records</div>', 'span-2')}

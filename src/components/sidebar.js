@@ -1,6 +1,6 @@
 export function sidebar(active) {
   const items = [
-    ['dashboard', 'Dashboard', '▦'], ['employees', 'Employees', '♙'], ['attendance', 'Attendance', '✓'],
+    ['dashboard', 'Dashboard', '▦'], ['employees', 'Workers', '♙'], ['attendance', 'Attendance', '✓'],
     ['projects', 'Projects / Jobs', '▧'], ['expenses', 'Expenses', '↗'], ['payroll', 'Payroll', '◎'],
     ['payments', 'Payments', '৳'], ['reports', 'Reports', '▥'], ['settings', 'Settings', '⚙']
   ];
