@@ -1,2 +1,0 @@
-.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}.status-dot.green{background:#22c55e}.status-dot.red{background:#ef4444}
-.details-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.detail-item{padding:12px;border:1px solid var(--border);border-radius:8px}.detail-item label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.detail-item strong{font-size:14px}
