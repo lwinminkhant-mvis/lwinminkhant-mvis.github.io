@@ -144,9 +144,9 @@ window.LabourAttendance = (() => {
       const record = currentRecords.find(row => row.employee_id === employee.id);
       const projectId = record?.project_id || "";
       return `<article class="attendance-person ${status ? `is-${status}` : ""}">
-        <div class="attendance-person-info"><span class="attendance-avatar">${LabourApp.escapeHTML(initials(employee.full_name))}</span><div><strong>${LabourApp.escapeHTML(employee.full_name || "Employee")}</strong><small>${status ? statusLabel(status) : "Not marked"}</small></div></div>
+        <div class="attendance-person-info"><span class="attendance-avatar">${LabourApp.escapeHTML(initials(employee.full_name))}</span><div><strong data-no-translate>${LabourApp.escapeHTML(employee.full_name || "Employee")}</strong><small>${status ? statusLabel(status) : "Not marked"}</small></div></div>
         <button type="button" class="attendance-status-button ${status ? `status-${status}` : ""}" data-status-employee="${employee.id}" aria-label="Set attendance status for ${LabourApp.escapeHTML(employee.full_name)}">${status ? statusLabel(status) : "Tap to mark"}</button>
-        <select class="attendance-project" data-project-employee="${employee.id}" aria-label="Project for ${LabourApp.escapeHTML(employee.full_name)}"><option value="">No project</option>${projects.map(project => `<option value="${project.id}" ${projectId === project.id ? "selected" : ""}>${LabourApp.escapeHTML(project.name)}</option>`).join("")}</select>
+        <select class="attendance-project" data-project-employee="${employee.id}" aria-label="Project for ${LabourApp.escapeHTML(employee.full_name)}"><option value="">No project</option>${projects.map(project => `<option data-no-translate value="${project.id}" ${projectId === project.id ? "selected" : ""}>${LabourApp.escapeHTML(project.name)}</option>`).join("")}</select>
       </article>`;
     }).join("");
   }
@@ -197,6 +197,7 @@ window.LabourAttendance = (() => {
     const period = document.getElementById("attendancePeriod").value;
     const input = document.getElementById("attendancePeriodValue");
     const previousValue = input.value;
+    input.value = "";
     if (period === "year") {
       input.type = "number";
       input.min = "2000";

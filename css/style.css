@@ -96,6 +96,37 @@ tbody tr:hover { background: var(--surface-2); }
 .daily-expense-total { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:var(--surface-2); }
 .daily-expense-total span { color:var(--muted); font-weight:700; }.daily-expense-total strong { font-size:20px; }
 .dashboard-employee-list { max-height:420px; overflow:auto; }
+.period-control { display:flex; align-items:center; gap:7px; color:var(--muted); font-size:12px; font-weight:750; }
+.period-control input,.period-control select { border:1px solid var(--border); border-radius:8px; background:var(--surface); color:var(--text); padding:9px 10px; }
+.period-cards { padding:14px 16px; }
+.period-cards .value { font-size:20px; }
+.monthly-ledger-summary { display:grid; grid-template-columns:1fr; padding:6px 16px; }
+.monthly-ledger-summary > div { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+.monthly-ledger-summary > div:last-child { border-bottom:0; }
+.monthly-ledger-summary span { color:var(--muted); font-size:13px; font-weight:700; }
+.monthly-ledger-summary strong { text-align:right; }
+.monthly-ledger-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr)); align-items:start; gap:14px; padding:16px; }
+.monthly-ledger-card { border:1px solid var(--border); border-radius:13px; background:var(--surface); overflow:hidden; box-shadow:var(--shadow); }
+.monthly-ledger-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px; background:var(--surface-2); border-bottom:1px solid var(--border); }
+.monthly-ledger-name { min-width:0; display:flex; align-items:center; gap:10px; border:0; background:none; color:var(--text); padding:0; text-align:left; cursor:pointer; }
+.monthly-ledger-name > span:last-child { min-width:0; display:grid; gap:3px; }
+.monthly-ledger-name strong { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.monthly-ledger-name small { color:var(--muted); font-size:11px; }
+.monthly-ledger-name:hover strong { color:var(--primary); }
+.monthly-ledger-details { padding:8px 14px 12px; }
+.monthly-ledger-details > div { display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--border); }
+.monthly-ledger-details > div:last-child { border-bottom:0; }
+.monthly-ledger-details span { color:var(--muted); font-size:12px; }
+.monthly-ledger-details strong { text-align:right; font-size:13px; }
+.monthly-ledger-details .monthly-ledger-final { margin:0 -4px; padding:12px 4px 4px; }
+.monthly-ledger-final span,.monthly-ledger-final strong { font-weight:850; }
+.wage-balance-summary { display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding:13px 16px; background:var(--surface-2); color:var(--muted); }
+.wage-balance-summary strong { color:var(--text); }
+.employee-payment-link { display:inline-flex; align-items:center; gap:9px; border:0; background:none; color:var(--text); padding:2px 0; font:inherit; font-weight:800; text-align:left; cursor:pointer; }
+.employee-payment-link:hover .employee-payment-name { color:var(--primary); text-decoration:underline; text-underline-offset:3px; }
+.employee-payment-avatar { width:34px; height:34px; flex:0 0 34px; display:grid; place-items:center; border-radius:11px; background:var(--primary-2); color:var(--primary); font-size:12px; font-weight:850; }
+.employee-payment-name { white-space:nowrap; }
+.signed-balance.positive { color:var(--success); }.signed-balance.negative { color:var(--danger); }
 .attendance-entry .panel-head { align-items:flex-start; flex-wrap:wrap; }
 .attendance-entry .panel-head h2 { margin-bottom:5px; }
 .attendance-key { display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:12px 16px; color:var(--muted); font-size:12px; border-bottom:1px solid var(--border); }
@@ -130,5 +161,8 @@ tbody tr:hover { background: var(--surface-2); }
   .cards{grid-template-columns:1fr 1fr}.two-cols,.three-cols{grid-template-columns:1fr}.search{min-width:180px}
 }
 @media (max-width: 430px) { .cards{grid-template-columns:1fr}.topbar .email{display:none}.panel-head{align-items:flex-start;flex-direction:column}.toolbar{width:100%}.search{width:100%} }
+@media (max-width: 760px) { .auth-card { padding:24px; } }
 @media (max-width: 520px) { .attendance-roster { grid-template-columns:1fr; padding:10px; }.attendance-entry .panel-head .toolbar { width:100%; }.attendance-entry .panel-head .toolbar > * { flex:1; }.attendance-entry .panel-head .toolbar input { min-width:0; }.attendance-key { gap:9px; }.attendance-key .muted { width:100%; }.attendance-summary { padding-inline:10px; gap:6px; }.attendance-total { padding:8px; } }
 @media (max-width: 520px) { .dashboard-expenses > .panel-head > input { width:100%; }.dashboard-employees .panel-head .toolbar { display:grid; grid-template-columns:1fr; }.dashboard-employee-list { max-height:340px; } }
+@media (max-width: 760px) { .period-cards { grid-template-columns:repeat(2,minmax(0,1fr)); }.period-control { flex-wrap:wrap; } }
+@media (max-width: 520px) { .monthly-ledger-grid { grid-template-columns:1fr; padding:10px; }.monthly-ledger-card-head { align-items:flex-start; flex-direction:column; }.monthly-ledger-details > div { gap:8px; }.monthly-ledger-details strong { max-width:55%; } }

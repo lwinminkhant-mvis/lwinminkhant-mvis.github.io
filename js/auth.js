@@ -35,7 +35,6 @@ window.LabourAuth = (() => {
       document.getElementById("switchText").textContent = registering ? "Already have an account?" : "New here?";
       document.getElementById("authSwitch").textContent = registering ? "Sign in" : "Create account";
     });
-
     document.getElementById("authForm").addEventListener("submit", async event => {
       event.preventDefault();
       if (!LabourDB.keyIsConfigured()) {
